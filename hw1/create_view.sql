@@ -1,21 +1,44 @@
+WITH ticket_flights_info AS (
+    SELECT
+        flight_id,
+        COUNT(ticket_no) as psngr_num
+    FROM
+        ticket_flights
+    GROUP BY
+        flight_id
+)
+
 CREATE OR REPLACE VIEW airport_traffic AS
 
 SELECT
     a.airport_code,
-    COUNT(DISTINCT f1.flight_id) AS departure_flights_num,
-    COUNT(DISTINCT tf1.ticket_no) AS departure_psngr_num,
-    COUNT(DISTINCT f2.flight_id) AS arrival_flights_num,
-    COUNT(DISTINCT tf2.ticket_no) AS arrival_psngr_num
+    -- суммируем количество попавших в аэропорт прилетающих рейсов
+    SUM(CASE
+        WHEN fl.departure_airport = a.airport_code
+        THEN 1
+        ELSE 0) AS departure_flights_num,
+    -- суммируем заранее агрегированные данные по количеству людей в каждом вылетающем рейсе
+    SUM(CASE
+        WHEN fl.departure_airport = a.airport_code
+        THEN tf.psngr_num
+        ELSE 0) AS departure_psngr_num,
+    -- суммируем количество попавших в аэропорт вылетающих рейсов
+    SUM(CASE
+        WHEN fl.arrival_airport = a.airport_code
+        THEN 1
+        ELSE 0) AS arrival_flights_num,
+    -- суммируем заранее агрегированные данные по количеству людей в каждом прилетающем рейсе
+    SUM(CASE
+        WHEN fl.departure_airport = a.airport_code
+        THEN tf.psngr_num
+        ELSE 0) AS arrival_psngr_num,
 
 FROM
     airports a
-    LEFT JOIN flights f1
-        ON a.airport_code = f1.departure_airport
-    LEFT JOIN ticket_flights tf1
-        ON f1.flight_id = tf1.flight_id
-    LEFT JOIN flights f2
-        ON a.airport_code = f2.arrival_airport
-    LEFT JOIN ticket_flights tf2
-        ON f2.flight_id = tf2.flight_id
+    LEFT JOIN flights fl
+        ON a.airport_code = fl.departure_airport OR a.airport_code = fl.arrival_airport
+    LEFT JOIN ticket_flights_info tf
+        ON tf.flight_id = fl.flight_id
 
-GROUP BY a.airport_code;
+GROUP BY
+    a.airport_code;
