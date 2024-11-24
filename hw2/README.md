@@ -2,6 +2,7 @@
 ### Команда - Дмитрий Янаков, Владислав Люкшин, Данила Грашенков.
 
 Data Vault взят из этой статьи - https://habr.com/ru/articles/829338/.
+
 Остальные совпадения (дебезиум, кафка) - из семинара 5й недели https://github.com/mgcrp/hse_ftda_dwh_course_2024/tree/master/week05/sem.
 
 Почему выбрали Data Vault:
