@@ -6,7 +6,7 @@
 2) Поднимаем всю систему с помощью `sh docker-init.sh`.
 3) Заходим в UI Airflow по `localhost:8080` (Username - `airflow`, Password - `airflow`).
 4) Добавляем подключение: Connection Id - `postgres_dwh`, Connection Type - `postgres`, Host - `host.docker.internal`, Database - `postgres`, Login - `postgres`, Password - `postgres`, Port - `5434`.
-5) Триггерим даги!
+5) Триггерим даги **frequent_flyers** и **passenger_traffic_airports**!
 
 После запуска дагов в DWH появится новая схема **presentation** и две новые таблицы, соответствующие двум ETL.
 
