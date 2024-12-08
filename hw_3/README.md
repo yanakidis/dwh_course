@@ -2,7 +2,7 @@
 ### Команда - Дмитрий Янаков, Владислав Люкшин, Данила Грашенков.
 
 Настройка:
-1) Выполняем `docker compose up airflow-init`, чтобы инициализировать Airflow.
+1) Выполняем `docker-compose up airflow-init`, чтобы инициализировать Airflow.
 2) Поднимаем всю систему с помощью `sh docker-init.sh`.
 3) Заходим в UI Airflow по `localhost:8080` (Username - `airflow`, Password - `airflow`).
 4) Добавляем подключение: Connection Id - `postgres_dwh`, Connection Type - `postgres`, Host - `host.docker.internal`, Database - `postgres`, Login - `postgres`, Password - `postgres`, Port - `5434`.
