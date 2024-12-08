@@ -8,7 +8,7 @@
 4) Добавляем подключение: Connection Id - `postgres_dwh`, Connection Type - `postgres`, Host - `host.docker.internal`, Database - `postgres`, Login - `postgres`, Password - `postgres`, Port - `5434`.
 5) Триггерим даги **frequent_flyers** и **passenger_traffic_airports** (предварительно загрузив какие-то данные в мастер, чтобы были осмысленные результаты)!
 
-После запуска дагов в DWH появится новая схема **presentation** и две новые таблицы, соответствующие двум ETL.
+После запуска дагов в DWH появится новая схема **presentation** и две новые таблицы (с такими же названиями, как у дагов), соответствующие двум ETL.
 
 Сделали без бонусных заданий. 
 
