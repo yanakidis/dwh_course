@@ -445,6 +445,7 @@ services:
         condition: service_completed_successfully
 
   superset:
+    build: .
     image: apache/superset:latest
     container_name: superset
     environment:
